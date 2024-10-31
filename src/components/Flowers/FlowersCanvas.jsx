@@ -1,9 +1,61 @@
+import { useEffect, useState } from "react";
 import { stars } from "../../utils";
 import "./flowers.css";
 const FlowersCanvas = () => {
+  const [lettersTop, setLettersTop] = useState([]);
+  const [lettersBottom, setLettersBottom] = useState([]);
+  const [uniqueKey, setUniqueKey] = useState(0);
+
+  const messageToDisplay = ["Je t'aime Assia Imsour !", "Ibrahim Kody saneda"];
+
+  useEffect(() => {
+    const displayText = (topMessage, bottomMessage = "") => {
+      const charactersTop = topMessage.split("").map((char, index) => ({
+        char,
+        delay: Math.random() * 2,
+        key: `top-${index}`,
+      }));
+      const charactersBottom = bottomMessage
+        ? bottomMessage.split("").map((char, index) => ({
+            char,
+            delay: Math.random() * 2,
+            key: `bottom-${index}`,
+          }))
+        : [];
+
+      setLettersTop(charactersTop);
+      setLettersBottom(charactersBottom);
+      setUniqueKey((prevKey) => prevKey + 1);
+    };
+
+    // Display the first message pair immediately
+
+    const interval = setTimeout(() => {
+      displayText(messageToDisplay[0], messageToDisplay[1]);
+    }, 6000);
+
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, []);
   return (
     <div>
-      <div>continuer</div>
+      <div className="absolute top-[-450px]">
+        <div key={uniqueKey} className="title text-[2.5rem] font-bold">
+          {/* Top line */}
+          <div className="text-line">
+            {lettersTop.map(({ char, delay, key }) => (
+              <span
+                key={key}
+                style={{ animationDelay: `${delay}s` }}
+                className="animated-letter"
+              >
+                {char === " " ? "\u00A0" : char}
+              </span>
+            ))}
+          </div>
+
+          {/* Bottom line */}
+        </div>
+      </div>
       <div className="flowers">
         <div className="flower flower--1">
           <div className="flower__leafs flower__leafs--1">
