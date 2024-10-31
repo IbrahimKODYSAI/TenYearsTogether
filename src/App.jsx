@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Home from "./components/Home";
 import Flowers from "./components/Flowers";
 import FlowersCanvas from "./components/Flowers/FlowersCanvas";
@@ -8,28 +9,26 @@ import AuroraScene from "./components/Aurora";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768); // Set initial width check for desktop
+  const [showButton, setShowButton] = useState(false);
+
+  const [passCode, setPassCode] = useState("");
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth > 768);
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+    if (passCode === "01112014") {
+      setShowButton(true);
+    }
+  }, [passCode]);
   const enterFullscreen = () => {
-    const element = document.documentElement;
+    const element = document.documentElement; // Fullscreen on the entire page
 
     if (element.requestFullscreen) {
       element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
+      element.mozRequestFullScreen(); // Firefox
     } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
+      element.webkitRequestFullscreen(); // Chrome, Safari, Opera
     } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
+      element.msRequestFullscreen(); // IE/Edge
     }
 
     setIsFullscreenApplied(true);
@@ -65,13 +64,13 @@ function App() {
   }, []);
 
   let fireworksAudio = new Audio("./sounds/fireworks1.mp3");
-  let bgMusicAudio = new Audio("./sounds/bg-music.mp3");
-  bgMusicAudio.loop = true;
+  let bgMusicAuddio = new Audio("./sounds/bg-music.mp3");
+  bgMusicAuddio.loop = true;
   fireworksAudio.volume = 0.3;
 
   const playTheSound = () => {
     const currentPath = window.location.pathname;
-    bgMusicAudio.play();
+    bgMusicAuddio.play();
     if (currentPath === "/") {
       fireworksAudio.play();
     }
@@ -79,18 +78,10 @@ function App() {
 
   const routesWithAurora = ["/", "/something-for-you", "/flowers-for-you"];
 
-  if (!isDesktop) {
-    return (
-      <div className="text-center mt-20 text-lg">
-        Please view this content on a larger screen.
-      </div>
-    );
-  }
-
   return (
     <div>
       {routesWithAurora.includes(location.pathname) && <AuroraScene />}
-      {isFullscreenApplied ? (
+      {isFullscreenApplied && (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -98,18 +89,35 @@ function App() {
             <Route path="/flowers-for-you" element={<FlowersCanvas />} />
           </Routes>
         </BrowserRouter>
-      ) : (
-        <div className="absolute flex justify-center top-[50vh] m-auto w-[100%] left-0 text-3xl">
-          <button
-            onClick={() => {
-              enterFullscreen();
-              playTheSound();
-              setIsFullscreenApplied(true);
-            }}
-            className="text-white px-4 py-2 rounded-lg btn2"
-          >
-            Commencer
-          </button>
+      )}
+      {!isFullscreenApplied && (
+        <div>
+          {!showButton && (
+            <div className="flex justify-center m-auto  w-[100vw] h-[100vh] bg-black">
+              <input
+                type="text"
+                onChange={(e) => {
+                  setPassCode(e.target.value);
+                }}
+                value={passCode}
+                className="border rounded-lg bg-transparent py-1 px-2 w-[280px] h-max m-auto z-50"
+                placeholder="Entre notre date d'anniversaire..."
+              />
+            </div>
+          )}
+          {showButton && (
+            <div className="absolute flex justify-center top-[50vh] m-auto  w-[100%] left-0 text-3xl">
+              <button
+                onClick={() => {
+                  enterFullscreen(), playTheSound();
+                  setIsFullscreenApplied(true);
+                }}
+                className="text-white px-4 py-2 rounded-lg btn2"
+              >
+                Commencer
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

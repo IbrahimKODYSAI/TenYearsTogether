@@ -110,7 +110,7 @@ const Flowers = () => {
     const timer1 = () => {
       setTimeout(() => {
         setShowOpenButton(true);
-      }, 138000);
+      }, 144000);
     };
     timer1();
     return () => clearInterval(interval, timer1); // Clear interval on component unmount

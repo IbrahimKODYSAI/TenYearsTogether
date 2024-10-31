@@ -25,6 +25,7 @@ html {
   transition: all 450ms ease-in-out;
   z-index: 50;
 }
+
 .btn2:hover {
   border: none;
   background: linear-gradient(0deg, #7c84f3, #3f59ea);
@@ -32,4 +33,10 @@ html {
     inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
     0px 0px 0px 4px rgba(255, 255, 255, 0.2), 0px 0px 180px 0px #3f59ea;
   transform: translateY(-2px);
+}
+
+@media screen and (max-width: 900px) {
+  #root {
+    display: none;
+  }
 }
