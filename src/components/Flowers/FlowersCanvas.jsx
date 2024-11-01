@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { stars } from "../../utils";
 import "./flowers.css";
+import { Link } from "react-router-dom";
 const FlowersCanvas = () => {
   const [lettersTop, setLettersTop] = useState([]);
   const [lettersBottom, setLettersBottom] = useState([]);
   const [uniqueKey, setUniqueKey] = useState(0);
+
+  const [showOpenButton, setShowOpenButton] = useState(false);
 
   const messageToDisplay = ["Je t'aime Assia Imsour !", "Ibrahim Kody saneda"];
 
@@ -34,13 +37,25 @@ const FlowersCanvas = () => {
       displayText(messageToDisplay[0], messageToDisplay[1]);
     }, 6000);
 
+    // const timer1 = () => {
+    //   setTimeout(() => {
+    //     setShowOpenButton(true);
+    //   }, 9000);
+    // };
+    // timer1();
+
     return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
+
   return (
     <div>
-      <div className="absolute top-[-450px]">
+      <div className="absolute flex justify-center top-[50px] m-auto  w-[100%] left-0 z-10">
+        {/* {showOpenButton && (
+          <Link to="/place-to-visit">
+            <button className="btn">Continuer</button>
+          </Link>
+        )} */}
         <div key={uniqueKey} className="title text-[2.5rem] font-bold">
-          {/* Top line */}
           <div className="text-line">
             {lettersTop.map(({ char, delay, key }) => (
               <span
@@ -52,8 +67,6 @@ const FlowersCanvas = () => {
               </span>
             ))}
           </div>
-
-          {/* Bottom line */}
         </div>
       </div>
       <div className="flowers">

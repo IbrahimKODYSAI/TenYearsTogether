@@ -6,6 +6,7 @@ import Flowers from "./components/Flowers";
 import FlowersCanvas from "./components/Flowers/FlowersCanvas";
 import { useEffect, useState } from "react";
 import AuroraScene from "./components/Aurora";
+import Paralax from "./components/Paralax";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
@@ -13,11 +14,32 @@ function App() {
 
   const [passCode, setPassCode] = useState("");
 
+  const formatDate = (value) => {
+    // Remove any non-numeric characters
+    const cleanedValue = value.replace(/\D/g, "");
+
+    // Split into day, month, and year parts
+    const day = cleanedValue.slice(0, 2);
+    const month = cleanedValue.slice(2, 4);
+    const year = cleanedValue.slice(4, 8);
+
+    let formattedDate = day;
+    if (month) formattedDate += `/${month}`;
+    if (year) formattedDate += `/${year}`;
+    return formattedDate;
+  };
+
+  const handleInputChange = (e) => {
+    const formattedValue = formatDate(e.target.value);
+    setPassCode(formattedValue);
+  };
+
   useEffect(() => {
-    if (passCode === "01112014") {
+    if (["01/11/2014", "01-11-2014", "01112014"].includes(passCode)) {
       setShowButton(true);
     }
   }, [passCode]);
+
   const enterFullscreen = () => {
     const element = document.documentElement; // Fullscreen on the entire page
 
@@ -87,6 +109,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/something-for-you" element={<Flowers />} />
             <Route path="/flowers-for-you" element={<FlowersCanvas />} />
+            <Route path="/about" element={<Paralax />} />
           </Routes>
         </BrowserRouter>
       )}
@@ -97,7 +120,7 @@ function App() {
               <input
                 type="text"
                 onChange={(e) => {
-                  setPassCode(e.target.value);
+                  handleInputChange(e);
                 }}
                 value={passCode}
                 className="border rounded-lg bg-transparent py-1 px-2 w-[280px] h-max m-auto z-50"

@@ -1,6 +1,6 @@
 import React from "react";
-
-const index = () => {
+import "./paralax.css";
+const Paralax = () => {
   return (
     <body>
       <section>
@@ -14,4 +14,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Paralax;
