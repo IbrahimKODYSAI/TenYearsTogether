@@ -37,12 +37,12 @@ const FlowersCanvas = () => {
       displayText(messageToDisplay[0], messageToDisplay[1]);
     }, 6000);
 
-    // const timer1 = () => {
-    //   setTimeout(() => {
-    //     setShowOpenButton(true);
-    //   }, 9000);
-    // };
-    // timer1();
+    const timer1 = () => {
+      setTimeout(() => {
+        setShowOpenButton(true);
+      }, 9000);
+    };
+    timer1();
 
     return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
@@ -50,11 +50,6 @@ const FlowersCanvas = () => {
   return (
     <div>
       <div className="absolute flex justify-center top-[50px] m-auto  w-[100%] left-0 z-10">
-        {/* {showOpenButton && (
-          <Link to="/place-to-visit">
-            <button className="btn">Continuer</button>
-          </Link>
-        )} */}
         <div key={uniqueKey} className="title text-[2.5rem] font-bold">
           <div className="text-line">
             {lettersTop.map(({ char, delay, key }) => (
@@ -68,6 +63,13 @@ const FlowersCanvas = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="absolute flex justify-center top-[70vh] m-auto  w-[100%] left-0 z-10">
+        {showOpenButton && (
+          <Link to="/place-to-visit">
+            <button className="btn">Continuer</button>
+          </Link>
+        )}
       </div>
       <div className="flowers">
         <div className="flower flower--1">

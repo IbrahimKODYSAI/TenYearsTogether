@@ -90,6 +90,7 @@ function App() {
   let fireworksAudio = new Audio("./sounds/fireworks1.mp3");
   let bgMusicAuddio = new Audio("./sounds/bg-music.mp3");
   bgMusicAuddio.loop = true;
+  bgMusicAuddio.volume = 0.6;
   fireworksAudio.volume = 0.3;
 
   const playTheSound = () => {
@@ -153,11 +154,11 @@ function App() {
                   </button>
                 ) : (
                   <div>
-                    <p>
-                      Prend le temps d'admirer ce magnifique ciel étoilé,
-                      scintillant
+                    <p className="mb-4">
+                      Pendant le chargement, prends le temps d'admirer ce ciel
+                      étoilé scintillant,
                     </p>
-                    <p>et cette aurore boreal spécialement fait pour toi</p>
+                    <p>et cette aurore boréale spécialement faite pour toi</p>
                   </div>
                 )}
               </div>
@@ -170,8 +171,8 @@ function App() {
                         <i className="fas fa-volume-up text-5xl"></i>
                       </div>
                       <p>
-                        Pour une meilleur immersion et que tu puisse ressentir
-                        ce que j'avais en tête.
+                        Pour une meilleure immersion et pour ressentir ce que
+                        j'avais en tête pour toi.
                       </p>
                     </div>
                   </div>
