@@ -134,7 +134,7 @@ function App() {
                 }}
                 value={passCode}
                 className="border rounded-lg bg-transparent py-1 px-2 w-[280px] h-max m-auto z-50"
-                placeholder="Entre notre date d'anniversaire..."
+                placeholder="La date de notre anniversaire..."
               />
             </div>
           )}
@@ -161,8 +161,25 @@ function App() {
                   </div>
                 )}
               </div>
-              <div className="absolute flex justify-center top-[65vh] m-auto  w-[100%] left-0">
-                <Loading /> <p className=" self-end text-4xl pb-2">%</p>
+              <div>
+                {percentage === true ? (
+                  <div className="absolute flex justify-center top-[65vh] m-auto  w-[100%] left-0">
+                    <div>
+                      <div className="flex space-x-7 m-auto  justify-center mb-4">
+                        <i className="fas fa-headphones-alt text-5xl"></i>
+                        <i className="fas fa-volume-up text-5xl"></i>
+                      </div>
+                      <p>
+                        Pour une meilleur immersion et que tu puisse ressentir
+                        ce que j'avais en tête.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="absolute flex justify-center top-[65vh] m-auto  w-[100%] left-0">
+                    <Loading /> <p className=" self-end text-4xl pb-2">%</p>
+                  </div>
+                )}
               </div>
             </div>
           )}
