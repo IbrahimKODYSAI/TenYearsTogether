@@ -35,7 +35,7 @@ const Flowers = () => {
     "Tu te rappelles de notre rencontre ?",
     "Nous avons été complices et fusionnels à la seconde.",
     "Et comme tout couple normal,",
-    "il y a eu des hauts et des bas... c'est normal",
+    "il y a eu des hauts et des bas... c'est normal.",
     "Mais lorsqu'on se retrouve au téléphone",
     "ou physiquement en face l'un de l'autre,",
     "on s'aperçoit tout de suite",
@@ -183,14 +183,3 @@ const Flowers = () => {
 };
 
 export default Flowers;
-
-// "Et aujourd'hui, mon désir le plus cher,",
-// "",
-// "c'est de fonder une famille avec toi",
-// "et de vieillir à tes côtés In Sha Allah.",
-// "C'est aussi de tout faire",
-// "pour te rendre heureuse, t'apporter le sourire",
-// "te soutenir à tout moment",
-// "et t'aider à être la meilleure version de toi-même.",
-// "Que l'on puisse construire notre vie ensemble",
-// "et faire des projets de vie.",

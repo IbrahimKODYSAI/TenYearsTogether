@@ -66,7 +66,7 @@ const FlowersCanvas = () => {
       </div>
       <div className="absolute flex justify-center top-[70vh] m-auto  w-[100%] left-0 z-10">
         {showOpenButton && (
-          <Link to="/place-to-visit">
+          <Link to="/after-flower">
             <button className="btn">Continuer</button>
           </Link>
         )}

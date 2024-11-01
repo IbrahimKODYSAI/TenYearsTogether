@@ -2,7 +2,7 @@ import React from "react";
 import "./paralax.css";
 const Paralax = () => {
   return (
-    <body>
+    <div>
       <section>
         <img src="bg.jpg" id="bg" />
         <img src="moon.png" id="moon" />
@@ -10,7 +10,8 @@ const Paralax = () => {
         <img src="road.png" id="road" />
         <h2 id="text">Moon Light</h2>
       </section>
-    </body>
+      <div>lorem</div>
+    </div>
   );
 };
 

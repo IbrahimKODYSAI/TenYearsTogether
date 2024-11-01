@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import "./AuroraScene.css";
 
 const randomInRange = (min, max) =>

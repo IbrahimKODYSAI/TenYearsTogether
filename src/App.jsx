@@ -6,8 +6,9 @@ import Flowers from "./components/Flowers";
 import FlowersCanvas from "./components/Flowers/FlowersCanvas";
 import { useEffect, useState } from "react";
 import AuroraScene from "./components/Aurora";
-import Paralax from "./components/Paralax";
 import Loading from "./components/Loading";
+import AfterFlower from "./components/AfterFlower";
+import PruplePage from "./components/PurplePage";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
@@ -109,7 +110,12 @@ function App() {
     }
   }, [showButton]);
 
-  const routesWithAurora = ["/", "/something-for-you", "/flowers-for-you"];
+  const routesWithAurora = [
+    "/",
+    "/something-for-you",
+    "/flowers-for-you",
+    "/after-flower",
+  ];
 
   return (
     <div>
@@ -120,7 +126,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/something-for-you" element={<Flowers />} />
             <Route path="/flowers-for-you" element={<FlowersCanvas />} />
-            <Route path="/about" element={<Paralax />} />
+            <Route path="/after-flower" element={<AfterFlower />} />
+            <Route path="/iloveyou" element={<PruplePage />} />
           </Routes>
         </BrowserRouter>
       )}
@@ -145,8 +152,8 @@ function App() {
                 {percentage === true ? (
                   <button
                     onClick={() => {
-                      enterFullscreen(), playTheSound();
-                      setIsFullscreenApplied(true);
+                      enterFullscreen();
+                      playTheSound();
                     }}
                     className="text-white px-4 py-2 rounded-lg btn2"
                   >
