@@ -7,10 +7,12 @@ import FlowersCanvas from "./components/Flowers/FlowersCanvas";
 import { useEffect, useState } from "react";
 import AuroraScene from "./components/Aurora";
 import Paralax from "./components/Paralax";
+import Loading from "./components/Loading";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [percentage, setPercentage] = useState(false);
 
   const [passCode, setPassCode] = useState("");
 
@@ -98,6 +100,14 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (showButton === true) {
+      setTimeout(() => {
+        setPercentage(true);
+      }, 15000);
+    }
+  }, [showButton]);
+
   const routesWithAurora = ["/", "/something-for-you", "/flowers-for-you"];
 
   return (
@@ -129,16 +139,31 @@ function App() {
             </div>
           )}
           {showButton && (
-            <div className="absolute flex justify-center top-[50vh] m-auto  w-[100%] left-0 text-3xl">
-              <button
-                onClick={() => {
-                  enterFullscreen(), playTheSound();
-                  setIsFullscreenApplied(true);
-                }}
-                className="text-white px-4 py-2 rounded-lg btn2"
-              >
-                Commencer
-              </button>
+            <div>
+              <div className="absolute flex justify-center top-[50vh] m-auto  w-[100%] left-0 text-3xl">
+                {percentage === true ? (
+                  <button
+                    onClick={() => {
+                      enterFullscreen(), playTheSound();
+                      setIsFullscreenApplied(true);
+                    }}
+                    className="text-white px-4 py-2 rounded-lg btn2"
+                  >
+                    Commencer
+                  </button>
+                ) : (
+                  <div>
+                    <p>
+                      Prend le temps d'admirer ce magnifique ciel étoilé,
+                      scintillant
+                    </p>
+                    <p>et cette aurore boreal spécialement fait pour toi</p>
+                  </div>
+                )}
+              </div>
+              <div className="absolute flex justify-center top-[65vh] m-auto  w-[100%] left-0">
+                <Loading /> <p className=" self-end text-4xl pb-2">%</p>
+              </div>
             </div>
           )}
         </div>

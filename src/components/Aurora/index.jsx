@@ -84,7 +84,7 @@ const AuroraEffect = () => {
 
   // Generate static hues for the aurora lights
   const hues = [120, 180, 240, 280];
-  const alphas = [0.5, 0.5, 0.5, 0.2];
+  const alphas = [0.5, 0.6, 0.5, 0.3];
 
   return (
     <div
