@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PurplePageStyle.css";
 import "../Aurora/AuroraScene.css";
+import { Link } from "react-router-dom";
 
 const randomInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -86,6 +87,7 @@ const PurplePage = () => {
   const [lettersBottom, setLettersBottom] = useState([]);
   const [uniqueKey, setUniqueKey] = useState(0);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [showOpenButton, setShowOpenButton] = useState(false);
 
   const messageToDisplay = ["Je t'aime."];
 
@@ -112,30 +114,43 @@ const PurplePage = () => {
     // Display the first message pair immediately
     displayText(messageToDisplay[0], messageToDisplay[1]);
 
-    const interval = setInterval(() => {
-      setCurrentMessageIndex((prevIndex) => {
-        const nextIndex = prevIndex + 2;
-
-        // Check if we have reached the end of the messages
-        if (nextIndex >= messageToDisplay.length) {
-          clearInterval(interval);
-          return prevIndex; // Keep the current index to stop updating
-        }
-
-        // Display next message pair
-        displayText(
-          messageToDisplay[nextIndex],
-          messageToDisplay[nextIndex + 1] || ""
-        );
-
-        return nextIndex; // Move to the next pair
-      });
-    }, 6000);
-
-    return () => clearInterval(interval); // Clear interval on component unmount
+    const timer1 = () => {
+      setTimeout(() => {
+        setShowOpenButton(true);
+      }, 5000);
+    };
+    timer1();
+    return () => clearInterval(timer1); // Clear interval on component unmount
   }, []);
   return (
     <div>
+      {showOpenButton && (
+        <div className="absolute flex justify-center  m-auto  w-[100%] left-0 z-50 top-[70vh]">
+          <Link to="/">
+            <div className="btn">
+              <svg
+                height="24"
+                width="24"
+                fill="#FFFFFF"
+                viewBox="0 0 24 24"
+                className="sparkle"
+              >
+                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+              </svg>
+              <span className="text">Revoir</span>
+              <svg
+                height="24"
+                width="24"
+                fill="#FFFFFF"
+                viewBox="0 0 24 24"
+                className="sparkle"
+              >
+                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+              </svg>
+            </div>
+          </Link>
+        </div>
+      )}
       <div key={uniqueKey} className="title text-[2.5rem] font-bold">
         {/* Top line */}
         <div className="text-line z-50">

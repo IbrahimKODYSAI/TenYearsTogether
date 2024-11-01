@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Flowers from "./components/Flowers";
 import FlowersCanvas from "./components/Flowers/FlowersCanvas";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AuroraScene from "./components/Aurora";
 import Loading from "./components/Loading";
 import AfterFlower from "./components/AfterFlower";
@@ -12,6 +12,8 @@ import PruplePage from "./components/PurplePage";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
+  const [isSoundPlaying, setSoundPlaying] = useState(false);
+  const prevIsSoundPlayingRef = useRef(isSoundPlaying);
   const [showButton, setShowButton] = useState(false);
   const [percentage, setPercentage] = useState(false);
 
@@ -94,14 +96,6 @@ function App() {
   bgMusicAuddio.volume = 0.6;
   fireworksAudio.volume = 0.3;
 
-  const playTheSound = () => {
-    const currentPath = window.location.pathname;
-    bgMusicAuddio.play();
-    if (currentPath === "/") {
-      fireworksAudio.play();
-    }
-  };
-
   useEffect(() => {
     if (showButton === true) {
       setTimeout(() => {
@@ -110,12 +104,36 @@ function App() {
     }
   }, [showButton]);
 
+  useEffect(() => {
+    // Only play sound if the previous state was false and the current state is true
+    if (!prevIsSoundPlayingRef.current && isSoundPlaying) {
+      playTheSound();
+    }
+    // Update the ref with the current state after each render
+    prevIsSoundPlayingRef.current = isSoundPlaying;
+  }, [isSoundPlaying]);
+
+  const playTheSound = () => {
+    const currentPath = window.location.pathname;
+    bgMusicAuddio.play();
+    if (currentPath === "/") {
+      fireworksAudio.play();
+    }
+  };
+
   const routesWithAurora = [
     "/",
     "/something-for-you",
     "/flowers-for-you",
     "/after-flower",
+    "/iloveyou",
   ];
+
+  const soundAllowed = () => {
+    if (isSoundPlaying === false) {
+      setSoundPlaying(true);
+    }
+  };
 
   return (
     <div>
@@ -153,7 +171,7 @@ function App() {
                   <button
                     onClick={() => {
                       enterFullscreen();
-                      playTheSound();
+                      soundAllowed();
                     }}
                     className="text-white px-4 py-2 rounded-lg btn2"
                   >

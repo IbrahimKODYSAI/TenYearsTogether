@@ -9,7 +9,7 @@ const FlowersCanvas = () => {
 
   const [showOpenButton, setShowOpenButton] = useState(false);
 
-  const messageToDisplay = ["Je t'aime Assia Imsour !", "Ibrahim Kody saneda"];
+  const messageToDisplay = ["Je t'aime Assia Imsour.", "Ibrahim Kody saneda"];
 
   useEffect(() => {
     const displayText = (topMessage, bottomMessage = "") => {
