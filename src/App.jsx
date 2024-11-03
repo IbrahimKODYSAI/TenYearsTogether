@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./components/Home";
 import Flowers from "./components/Flowers";
@@ -9,13 +9,15 @@ import AuroraScene from "./components/Aurora";
 import Loading from "./components/Loading";
 import AfterFlower from "./components/AfterFlower";
 import PruplePage from "./components/PurplePage";
+import Paralax from "./components/Paralax";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const [isFullscreenApplied, setIsFullscreenApplied] = useState(false);
   const [isSoundPlaying, setSoundPlaying] = useState(false);
   const prevIsSoundPlayingRef = useRef(isSoundPlaying);
-  const [showButton, setShowButton] = useState(false);
-  const [percentage, setPercentage] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  const [percentage, setPercentage] = useState(true);
 
   const [passCode, setPassCode] = useState("");
 
@@ -126,7 +128,6 @@ function App() {
     "/something-for-you",
     "/flowers-for-you",
     "/after-flower",
-    "/iloveyou",
   ];
 
   const soundAllowed = () => {
@@ -135,23 +136,26 @@ function App() {
     }
   };
 
+  const location = useLocation();
+
   return (
     <div>
       {routesWithAurora.includes(location.pathname) && <AuroraScene />}
-      {isFullscreenApplied && (
-        <BrowserRouter>
-          <Routes>
+      {!isFullscreenApplied && (
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/something-for-you" element={<Flowers />} />
             <Route path="/flowers-for-you" element={<FlowersCanvas />} />
             <Route path="/after-flower" element={<AfterFlower />} />
             <Route path="/iloveyou" element={<PruplePage />} />
+            <Route path="/paralax" element={<Paralax />} />
           </Routes>
-        </BrowserRouter>
+        </AnimatePresence>
       )}
       {!isFullscreenApplied && (
         <div>
-          {!showButton && (
+          {/* {!showButton && (
             <div className="flex justify-center m-auto  w-[100vw] h-[100vh] bg-black">
               <input
                 type="text"
@@ -163,15 +167,15 @@ function App() {
                 placeholder="La date de notre anniversaire..."
               />
             </div>
-          )}
-          {showButton && (
+          )} */}
+          {/* {showButton && (
             <div>
               <div className="absolute flex justify-center top-[50vh] m-auto  w-[100%] left-0 text-3xl">
                 {percentage === true ? (
                   <button
                     onClick={() => {
                       enterFullscreen();
-                      soundAllowed();
+                      // soundAllowed();
                     }}
                     className="text-white px-4 py-2 rounded-lg btn2"
                   >
@@ -208,7 +212,7 @@ function App() {
                 )}
               </div>
             </div>
-          )}
+          )} */}
         </div>
       )}
     </div>

@@ -70,7 +70,7 @@ const AfterFlower = () => {
     const timer1 = () => {
       setTimeout(() => {
         setShowOpenButton(true);
-      }, 30000);
+      }, 1000);
     };
     timer1();
     return () => clearInterval(interval, timer1); // Clear interval on component unmount

@@ -1,15 +1,11 @@
 #root {
-  max-width: 100vw;
-  margin: 0 auto;
   text-align: center;
-}
-
-body,
-html {
-  height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+}
+body {
+  width: 100vw;
+  height: 100vh;
 }
 
 .btn2 {
@@ -39,4 +35,31 @@ html {
   #root {
     display: none;
   }
+}
+
+.slide-in,
+.slide-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  transform-origin: bottom;
+  z-index: 50000000000;
+}
+
+.slide-out {
+  transform-origin: top;
+}
+
+.transition-text {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  z-index: 50000000001;
 }

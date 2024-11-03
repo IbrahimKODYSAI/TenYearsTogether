@@ -40,7 +40,7 @@ const FlowersCanvas = () => {
     const timer1 = () => {
       setTimeout(() => {
         setShowOpenButton(true);
-      }, 9000);
+      }, 1000);
     };
     timer1();
 
@@ -48,7 +48,7 @@ const FlowersCanvas = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flower-container">
       <div className="absolute flex justify-center top-[50px] m-auto  w-[100%] left-0 z-10">
         <div key={uniqueKey} className="title text-[2.5rem] font-bold">
           <div className="text-line">

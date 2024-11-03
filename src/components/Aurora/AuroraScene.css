@@ -6,12 +6,16 @@
   --hue: 220;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(180deg, #020222 0%, #020c2b 30%, #000000 100%);
+.aurora-container {
+  position: absolute;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
+  perspective: 1000px;
+  background: linear-gradient(180deg, #020222 0%, #020c2b 30%, #000000 100%);
+  top: 0;
+  left: 0;
+  z-index: -10000000000000000;
 }
 
 .stars,

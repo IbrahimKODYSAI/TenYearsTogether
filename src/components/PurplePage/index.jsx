@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PurplePageStyle.css";
 import "../Aurora/AuroraScene.css";
 import { Link } from "react-router-dom";
+import transitions from "../transitions";
 
 const randomInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
@@ -117,16 +118,16 @@ const PurplePage = () => {
     const timer1 = () => {
       setTimeout(() => {
         setShowOpenButton(true);
-      }, 5000);
+      }, 100);
     };
     timer1();
     return () => clearInterval(timer1); // Clear interval on component unmount
   }, []);
   return (
-    <div>
+    <div className=" overflow-hidden">
       {showOpenButton && (
         <div className="absolute flex justify-center  m-auto  w-[100%] left-0 z-50 top-[70vh]">
-          <Link to="/">
+          <Link to="/paralax">
             <div className="btn">
               <svg
                 height="24"
@@ -180,7 +181,7 @@ const PurplePage = () => {
           </div>
         )}
       </div>
-      <div className="">
+      <div className="purplepage-container">
         <div className="stars">
           {stars.map((star, index) => (
             <Star key={index} {...star} />
@@ -189,7 +190,7 @@ const PurplePage = () => {
         <StarsCross crossCount={CROSS_COUNT} />
         <StarsCrossAux crossCount={CROSS_COUNT} />
       </div>
-      <div className="absolute w-[100%] top-0 left-0 ">
+      <div className="">
         <div className="sky">
           <div className="mountains z-50">
             <div className="mountain-1 z-50"></div>
@@ -209,4 +210,4 @@ const PurplePage = () => {
   );
 };
 
-export default PurplePage;
+export default transitions(PurplePage);

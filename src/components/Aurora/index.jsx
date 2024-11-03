@@ -88,7 +88,7 @@ const AuroraEffect = () => {
 
   return (
     <div
-      className="scene"
+      className="aurora-container"
       style={{
         "--hue-1": hues[0],
         "--hue-2": hues[1],

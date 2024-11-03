@@ -17,7 +17,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true); // Show the message after 5000ms
-    }, 12000);
+    }, 1000);
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
